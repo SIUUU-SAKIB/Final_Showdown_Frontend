@@ -4,6 +4,13 @@ import { GrProjects } from 'react-icons/gr'
 import { TbLogs } from 'react-icons/tb'
 
 const About = () => {
+    const skills = [
+        { name: "SQL", percentage: "80%" },
+        { name: "React", percentage: "90%" },
+        { name: "NextJS", percentage: "95%" },
+        { name: "UI/UX", percentage: "85%" },
+        { name: "NoSql", percentage: "90%" },
+    ]
     return (
         <div className='min-w-screen  py-12'>
             <div className='max-w-7xl  mx-auto flex flex-col lg:flex-row items-center px-4'>
@@ -36,53 +43,17 @@ const About = () => {
                 </div>
                 {/* 2nd part */}
                 <div className='w-full lg:w-1/2  flex flex-col items-start gap-2 p-8'>
-                    <div className='flex flex-col gap-2 py-2 w-full'>
-                        <p className='text-md font-semibold text-black'>SQL 80%</p>
-                        <div className='border border-black/10 rounded-full w-full'>
-                            <div className='bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1 w-[80%]'></div>
-                        </div>
-                    </div>
-
-
-                   <div className='flex flex-col gap-2 py-2 w-full'>
-                        <p className='text-md font-semibold text-black'>JavaScript 90%</p>
-                        <div className='border border-black/10 rounded-full w-full'>
-                            <div className='bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1 w-[90%]'></div>
-                        </div>
-                    </div>
-
-
-              <div className='flex flex-col gap-2 py-2 w-full'>
-                        <p className='text-md font-semibold text-black'>React 95%</p>
-                        <div className='border border-black/10 rounded-full w-full'>
-                            <div className='bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1 w-[95%]'></div>
-                        </div>
-                    </div>
-
-
-                   <div className='flex flex-col gap-2 py-2 w-full'>
-                        <p className='text-md font-semibold text-black'>NextJs 85%</p>
-                        <div className='border border-black/10 rounded-full w-full'>
-                            <div className='bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1 w-[90%]'></div>
-                        </div>
-                    </div>
-
-
-
-                 <div className='flex flex-col gap-2 py-2 w-full'>
-                        <p className='text-md font-semibold text-black'>Figma 95%</p>
-                        <div className='border border-black/10 rounded-full w-full'>
-                            <div className='bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1 w-[95%]'></div>
-                        </div>
-                    </div>
-
-
-                      <div className='flex flex-col gap-2 py-2 w-full'>
-                        <p className='text-md font-semibold text-black'>NoSql 90%</p>
-                        <div className='border border-black/10 rounded-full w-full'>
-                            <div className='bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1 w-[90%]'></div>
-                        </div>
-                    </div>
+                    {
+                        skills.map(e => <div key={e.name} className='flex flex-col gap-2 py-2 w-full'>
+                            <p className='text-md font-semibold text-black'>{e.name} {e.percentage}</p>
+                            <div className='border border-black/10 rounded-full w-full'>
+                                <div
+                                    className="bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 h-2 rounded-full m-1"
+                                    style={{ width: `${e.percentage}` }}
+                                ></div>
+                            </div>
+                        </div>)
+                    }
                 </div>
             </div>
         </div>
