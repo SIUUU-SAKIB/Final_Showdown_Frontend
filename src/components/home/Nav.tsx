@@ -35,7 +35,7 @@ const Nav = () => {
         {user ? (
           <li className="flex gap-2 items-center justify-center">
             <Link href="/dashboard" className="text-white uppercase">Dashboard</Link>
-            <Link href={'/profile'}><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /></Link>
+            <img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" />
             <div onClick={() => {
               Swal.fire({
                 title: "Are you sure?",
@@ -81,7 +81,7 @@ const Nav = () => {
       </div>
       <ul className={`gap-4 flex flex-col absolute bg-black w-full left-0  ${open ? "top-16 opacity-100" : "-top-80 opacity-0"} transition-all transition-duration-800 items-start px-4 py-8`}>
         {user ? (
-          <li className="flex gap-2 items-center"> <Link href={'/profile'}><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /></Link><div onClick={() => {
+          <li className="flex gap-2 items-center"><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /><div onClick={() => {
               Swal.fire({
                 title: "Are you sure?",
                 showCancelButton: true,
