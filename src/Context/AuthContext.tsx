@@ -2,24 +2,18 @@
 'use client';
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import { fetchCurrentUser } from '@/lib/api';
-
 interface User {
     url: string | Blob | undefined;
     name?: string;
     email: string;
     role?: string;
 }
-
 interface AuthContextType {
     user: User | null;
     setUser: Dispatch<SetStateAction<User | null>>;
     loading: boolean;
 }
-
 const AuthContext = createContext<AuthContextType | null>(null);
-
-
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
@@ -37,7 +31,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         </AuthContext.Provider>
     );
 }
-
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

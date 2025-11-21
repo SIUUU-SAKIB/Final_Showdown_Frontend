@@ -1,3 +1,5 @@
+"use client"
+import { motion } from 'framer-motion'
 import React from 'react'
 import { GoPeople } from 'react-icons/go'
 import { GrProjects } from 'react-icons/gr'
@@ -12,7 +14,9 @@ const About = () => {
         { name: "NoSql", percentage: "90%" },
     ]
     return (
-        <div className='min-w-screen  py-12'>
+        <motion.div initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }} className='min-w-screen  py-12'>
             <div className='max-w-7xl  mx-auto flex flex-col lg:flex-row items-center px-4'>
                 {/* 1st part */}
                 <div className='w-full lg:w-1/2 flex flex-col gap-8 items-start text-black p-8'>
@@ -56,7 +60,7 @@ const About = () => {
                     }
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

@@ -1,30 +1,42 @@
 "use client";
 
-import BlogCard from "@/components/Others/BlogCard";
-import { getAllBlog, getAllBlogs } from "@/lib/blogs";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 
-const Page = () => {
+import BlogCard from "@/components/Others/BlogCard";
+import { getAllBlogs, getAllBlog } from "@/lib/blogs";
+
+interface Blog {
+  _id: string;
+  title: string;
+  image?: string;
+  content?: string;
+  createdAt?: string;
+}
+
+const BlogManagementPage = () => {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(3);
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [limit] = useState(3);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [totalBlogs, setTotalBlogs] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const totalPages = Math.ceil(totalBlogs / limit);
+  const totalPages = Math.max(1, Math.ceil(totalBlogs / limit));
 
   useEffect(() => {
     const fetchBlogs = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
-        const blogsRes = await getAllBlogs(page, 3);
-        const totalRes = await getAllBlog();
+        const [blogsRes, totalRes] = await Promise.all([
+          getAllBlogs(page, limit),
+          getAllBlog(),
+        ]);
+
         setBlogs(blogsRes?.data || []);
         setTotalBlogs(totalRes?.data?.length || 0);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
+      } catch (err) {
+        console.error("Failed to load blogs:", err);
       } finally {
         setLoading(false);
       }
@@ -33,55 +45,57 @@ const Page = () => {
     fetchBlogs();
   }, [page, limit]);
 
-  const handlePrev = () => {
-    if (page > 1) setPage((p) => p - 1);
-  };
-
-  const handleNext = () => {
-    if (page < totalPages) setPage((p) => p + 1);
-  };
+  const handlePrev = () => page > 1 && setPage((p) => p - 1);
+  const handleNext = () => page < totalPages && setPage((p) => p + 1);
 
   return (
     <div className="w-full min-h-screen text-black">
-      <div className="flex max-w-screen-2xl mx-auto gap-4 justify-between flex-col">
+      <div className="max-w-screen-2xl mx-auto flex flex-col gap-6">
+
         {/* Header */}
-        <div className="flex items-center w-full px-8 py-8 gap-8">
-          <div className="text-xl cursor-pointer w-full shadow bg-white text-black px-8 py-4 font-medium text-center hover:bg-black hover:text-white transition-all duration-300 hover:border hover:border-white">
+        <div className="flex items-center w-full px-8 py-4 md:py-8 gap-6">
+          <div className="w-full text-center text-md md:text-xl font-medium px-8 py-4 bg-white shadow rounded cursor-none">
             Total Blogs: {totalBlogs}
           </div>
 
           <Link
             href="/dashboard/create-blog"
-            className="text-xl cursor-pointer w-full shadow bg-white text-black px-8 py-4 font-medium text-center hover:bg-black hover:text-white transition-all duration-300 hover:border hover:border-white"
+            className="w-full text-center text-md md:text-xl font-medium px-4 py-4 bg-black text-white shadow rounded hover:bg-white hover:text-black transition border border-white/30 cursor-pointer"
           >
-            Create new Blog
+            Create New Blog
           </Link>
         </div>
 
+        {/* Blog List */}
         <div className="flex flex-col items-center gap-4">
           {loading ? (
-            <p className="text-gray-500 mt-8 text-lg">Loading blogs...</p>
+            <p className="text-gray-500 mt-6 text-lg">Loading blogs...</p>
           ) : blogs.length === 0 ? (
-            <p className="text-gray-500 mt-8 text-lg">No blogs found.</p>
+            <p className="text-gray-500 mt-6 text-lg">No blogs found.</p>
           ) : (
-            blogs.map((blog: any) => <BlogCard key={blog._id} blog={blog} />)
+            blogs.map((blog) => <BlogCard key={blog._id} blog={blog} />)
           )}
         </div>
 
+        {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex mx-auto bg-white gap-12 py-4 px-8 items-center rounded-lg shadow-md mt-8">
+          <div className="flex items-center gap-10 mx-auto bg-white py-4 px-8 rounded-lg shadow mb-8">
             <ArrowBigLeft
               onClick={handlePrev}
-              className={`font-bold text-2xl cursor-pointer transition ${
-                page === 1 ? "text-gray-300 cursor-not-allowed" : "hover:text-black"
+              className={`text-2xl cursor-pointer transition ${
+                page === 1
+                  ? "text-gray-300 cursor-not-allowed"
+                  : "hover:text-black"
               }`}
             />
-            <p className="text-xl font-bold">
+
+            <p className="text-xl font-semibold">
               Page {page} of {totalPages}
             </p>
+
             <ArrowBigRight
               onClick={handleNext}
-              className={`font-bold text-2xl cursor-pointer transition ${
+              className={`text-2xl cursor-pointer transition ${
                 page === totalPages
                   ? "text-gray-300 cursor-not-allowed"
                   : "hover:text-black"
@@ -94,4 +108,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default BlogManagementPage;

@@ -7,36 +7,36 @@ import Swal from "sweetalert2";
 const BlogCard = ({ blog }) => {
 
   const router = useRouter();
-  const publishBtn = async (id: string) => {
-    const payload = {
-      isPublished: true
-    }
+  // const publishBtn = async (id: string) => {
+  //   const payload = {
+  //     isPublished: true
+  //   }
 
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You want to publish this blog?",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, publish it!"
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await updateBlog(payload, id)
-        Swal.fire({
-          title: "Published",
-          text: "Your blog is published 😍",
-          icon: "success"
-        });
-        window.location.reload()
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You want to publish this blog?",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, publish it!"
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       await updateBlog(payload, id)
+  //       Swal.fire({
+  //         title: "Published",
+  //         text: "Your blog is published 😍",
+  //         icon: "success"
+  //       });
+  //       window.location.reload()
 
-      }
-    });
-
-
+  //     }
+  //   });
 
 
-  }
-  const editBtn = (id) => {
+
+
+  // }
+  const editBtn = (id:string) => {
     router.push(`/dashboard/${id}`)
   }
   const deleteBtn = async (id: string) => {
@@ -85,7 +85,7 @@ const BlogCard = ({ blog }) => {
 
         <div className="mt-3">
           <div className="flex flex-wrap gap-2 text-xs text-blue-600">
-            {blog?.tags.map((tag: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined, index: React.Key | null | undefined) => (
+            {blog?.tags.map((tag, index:number) => (
               <span key={index} className="bg-blue-100 px-2 py-1 rounded-full">{tag}</span>
             ))}
           </div>
@@ -97,7 +97,7 @@ const BlogCard = ({ blog }) => {
             <span>{new Date(blog?.createdAt).toLocaleDateString()}</span>
           </div>
 
-          <div className="mt-3">
+          {/* <div className="mt-3">
             <span
               className={`text-xs px-3 py-1 rounded-full ${blog?.isPublished
                 ? "bg-green-100 text-green-700"
@@ -106,12 +106,12 @@ const BlogCard = ({ blog }) => {
             >
               {blog?.isPublished ? "Published" : "Draft"}
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* buttons */}
         <div className="flex gap-2 w-full pt-4">
-          <button disabled={blog.isPublished} onClick={() => publishBtn(blog._id)} className={`text-md font-light text-center ${blog.isPublished ? "bg-gray-500 cursor-none" : "bg-green-500 cursor-pointer"}  w-full text-white py-2 `}>{blog.isPublished ? "Published" : "Publish"}</button>
+          {/* <button disabled={blog.isPublished} onClick={() => publishBtn(blog._id)} className={`text-md font-light text-center ${blog.isPublished ? "bg-gray-500 cursor-none" : "bg-green-500 cursor-pointer"}  w-full text-white py-2 `}>{blog.isPublished ? "Published" : "Publish"}</button> */}
           <button onClick={() => editBtn(blog._id)} className="text-md font-light text-center bg-blue-500 w-full text-white py-2 cursor-pointer">Edit</button>
           <button onClick={() => deleteBtn(blog._id)} className="text-md font-light text-center bg-red-500 w-full text-white py-2 cursor-pointer">Delete</button>
         </div>

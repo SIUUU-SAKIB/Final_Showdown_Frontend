@@ -1,26 +1,32 @@
 "use client"
 
 import { useAuth } from "@/Context/AuthContext"
+import { logoutUser } from "@/lib/api"
+import { LogOut } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import toast from "react-hot-toast"
 import { IoMdClose, IoMdMenu } from "react-icons/io"
+import Swal from "sweetalert2"
 
 const Nav = () => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
   const { user } = useAuth()
-  console.log(user)
   const nav = [
-    { link: "/", name: "home" },
-    { link: "/about", name: "about" },
-    { link: "/services", name: "services" },
-    { link: "/blog", name: "blog" },
+    { link: "/", name: "Home" },
+    { link: "/about", name: "About" },
+    { link: "/service", name: "Services" },
+    { link: "/projects/allproject", name: "Projects" },
+    { link: "/projects/allblogs", name: "Blogs" },
 
 
   ]
   return (
-    <div className={`min-w-screen ${open ? "bg-black" : "bg-transparent"} h-20 flex items-center transition-all transition-duration-800 justify-between px-4 lg:px-24 relative`}>
+    <div className={`z-100 min-w-screen ${open ? "bg-black" : "bg-transparent"} h-20 flex items-center transition-all transition-duration-800 justify-between px-4 lg:px-24 relative`}>
       <Link href={'/'} className='text-4xl font-black'>SAKIB</Link>
       <ul className="hidden gap-2 lg:flex items-center">
         {
@@ -29,7 +35,33 @@ const Nav = () => {
         {user ? (
           <li className="flex gap-2 items-center justify-center">
             <Link href="/dashboard" className="text-white uppercase">Dashboard</Link>
-            <Link href={'/profile'}><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /></Link></li>
+            <Link href={'/profile'}><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /></Link>
+            <div onClick={() => {
+              Swal.fire({
+                title: "Are you sure?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, logout!"
+              }).then(async (result) => {
+                if (result.isConfirmed) {
+                  try {
+                    await logoutUser()
+                    toast("Logout Successfull 😍")
+                    window.location.reload()
+                  } catch (error) {
+                    console.log(error)
+                  }
+                  Swal.fire({
+                    title: "Success!",
+                    text: "Successfully logged out",
+                    icon: "success"
+                  });
+                }
+              });
+
+            }} className="flex gap-1 items-center cursor-pointer shadow-sm p-2"><LogOut className="text-red-500 font-bold" /><p>logout</p></div></li>
+
 
         ) : (
           <li className="flex items-center gap-2">
@@ -49,7 +81,32 @@ const Nav = () => {
       </div>
       <ul className={`gap-4 flex flex-col absolute bg-black w-full left-0  ${open ? "top-16 opacity-100" : "-top-80 opacity-0"} transition-all transition-duration-800 items-start px-4 py-8`}>
         {user ? (
-          <li className="flex gap-2 items-center"> <Link href={'/profile'}><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /></Link><p className="font-md font-semibold">{user?.name}</p></li>
+          <li className="flex gap-2 items-center"> <Link href={'/profile'}><img src={user?.url} className="w-10 h-10 object-cover rounded-full border border-white cursor-pointer" /></Link><div onClick={() => {
+              Swal.fire({
+                title: "Are you sure?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, logout!"
+              }).then(async (result) => {
+                if (result.isConfirmed) {
+                  try {
+                    await logoutUser()
+                    toast("Logout Successfull 😍")
+                    window.location.reload()
+                  } catch (error) {
+                    console.log(error)
+                  }
+                  Swal.fire({
+                    title: "Success!",
+                    text: "Successfully logged out",
+                    icon: "success"
+                  });
+                }
+              });
+
+            }} className="flex gap-1 items-center cursor-pointer shadow-sm p-2"><LogOut className="text-red-500 font-bold" /><p>logout</p></div>
+            <Link href="/dashboard" className="text-white uppercase">Dashboard</Link></li>
 
         ) : (
           <li>

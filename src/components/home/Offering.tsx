@@ -1,55 +1,77 @@
-import React from 'react'
-import { Building2 } from "lucide-react";
-const Offering = () => {
-    return (
-        <div className='min-h-screen min-w-screen flex items-center justify-center relative'>
-            <div className='max-w-7xl mx-auto p-12 flex flex-col items-center justify-center gap-8'>
-                <div className='uppercase flex flex-col gap-4 items-center text-center text-black py-8'>
-                    <p className='text-4xl font-semibold'>MY OFFERINGS TO CLIENTS</p>
-                    <p className='text-sm font-light  text-black/70'>When you browse online, you might notice big price differences — and it can be confusing. The same goes for creative services. You’ll find plenty of options, but not all deliver the same value.
+"use client"
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
-                        I focus on providing high-quality, customized work designed to match your goals, not just the lowest price tag. Every project I take on is crafted with care, creativity, and clear communication — so you always know exactly what you’re getting.</p>
-                </div>
+const offerings = [
+  {
+    title: "Full Stack Application",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVUMNKPDhzSHxiL9yCeg8GzwAQT61PyqVnhtdwlquUZ9eSFdNF0SxWZlTMzQIQjOT_O78&usqp=CAU",
+    description:
+      "I build complete end-to-end web applications with seamless frontend, backend, and database integration. Using modern technologies like React, Next.js, Node.js, Express, and MongoDB, I deliver fast, scalable, and secure digital solutions crafted for real business needs.",
+  },
+  {
+    title: "Backend or Frontend",
+    img: "https://i.ytimg.com/vi/v0t42xBIYIs/maxresdefault.jpg",
+    description:
+      "Whether it's a beautiful and responsive UI or a secure, high-performance backend system, I ensure each layer is crafted with precision. From React/Next.js interfaces to Express/Node.js APIs and databases — everything works in harmony.",
+  },
+  {
+    title: "UI/UX Design",
+    img: "https://bif.telkomuniversity.ac.id/wp-content/uploads/2024/09/Mengapa-UI-UX-Design-Sangat-Penting-dalam-Pengembangan-Aplikasi.png",
+    description:
+      "I create clean, intuitive, user‑focused designs that feel effortless to navigate. From wireframes to prototypes, every layout is crafted to deliver smooth and meaningful digital experiences using Figma and Adobe XD.",
+  },
+];
 
+export default function Offering() {
+  return (
+    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 py-20 px-4">
+      <div className="max-w-6xl w-full mx-auto flex flex-col items-center text-center gap-8">
 
-                <div className='grid lg:grid-cols-2 grid-cols-1 gap-8 place-self-center'>
-                    <div className="max-w-md md:min-w-md rounded-sm bg-white p-6 shadow-sm ring-1 ring-black/5 transition hover:shadow-md text-black ">
-                        <div className="flex items-start flex-col gap-4">
-                            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVUMNKPDhzSHxiL9yCeg8GzwAQT61PyqVnhtdwlquUZ9eSFdNF0SxWZlTMzQIQjOT_O78&usqp=CAU"} className='w-[200px] object-cover' />
-                            <div className="flex-1">
-                                <h3 className="text-xl font-semibold uppercase">Full Stack Application</h3>
-                                <p className="mt-2 text-sm leading-6 text-gray-600">I specialize in building end-to-end web applications that combine sleek, responsive front-end design with robust, secure back-end functionality. From user-friendly interfaces to scalable APIs and databases, I ensure every layer works seamlessly together. Using modern technologies like React, Node.js, Express, and MongoDB, I create digital solutions that are fast, reliable, and tailored to your business goals. Whether you need a dynamic website, an admin dashboard, or a complex enterprise system — I deliver performance, precision, and clean code every time.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="max-w-md md:min-w-md rounded-sm bg-white p-6 shadow-sm ring-1 ring-black/5 transition hover:shadow-md text-black ">
-                        <div className="flex items-start flex-col gap-4">
-                            <img src={"https://i.ytimg.com/vi/v0t42xBIYIs/maxresdefault.jpg"} className='w-[200px] shadow-lg object-cover' />
-                            <div className="flex-1">
-                                <h3 className="text-xl font-semibold uppercase">Backend or Frontend</h3>
-                                <p className="mt-2 text-sm leading-6 text-gray-600">Whether it’s crafting a stunning frontend that engages users or building a powerful backend that drives performance, I ensure every part of your application works in perfect harmony.
-                                    On the frontend, I focus on clean design, responsiveness, and intuitive user experiences using frameworks like React and Next.js.
-                                    On the backend, I develop secure, efficient, and scalable systems powered by Node.js, Express, and modern databases like MongoDB or PostgreSQL.
-                                    Together, these layers create seamless, high-performing applications that look great and work even better.</p>
-                            </div>
-                        </div>
-                    </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-4 max-w-3xl"
+        >
+          <h2 className="text-4xl font-bold tracking-tight uppercase text-gray-900">
+            My Offerings to Clients
+          </h2>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            When browsing online, you'll find many service options — but not all deliver the
+            same value. I focus on providing high-quality, custom solutions crafted with
+            care, creativity, and clear communication. Every project is built to match your
+            goals and deliver real, measurable results.
+          </p>
+        </motion.div>
 
-                    <div className="max-w-md md:min-w-md rounded-sm bg-white p-6 shadow-sm ring-1 ring-black/5 transition hover:shadow-md text-black ">
-                        <div className="flex items-start flex-col gap-4">
-                            <img src={"https://bif.telkomuniversity.ac.id/wp-content/uploads/2024/09/Mengapa-UI-UX-Design-Sangat-Penting-dalam-Pengembangan-Aplikasi.png"} className='w-[200px] object-cover'
-                            />
-                            <div className="flex-1">
-                                <h3 className="text-xl font-semibold uppercase">UI/UX</h3>
-                                <p className="mt-2 text-sm leading-6 text-gray-600">Great design is more than visuals — it’s about creating experiences that feel effortless. I focus on crafting intuitive, user-centered interfaces that balance beauty with usability.
-                                    From wireframes and prototypes to final layouts, I design with purpose — ensuring every click, scroll, and interaction feels natural. Using tools like Figma and Adobe XD, I turn ideas into smooth, engaging digital experiences that connect users to your brand.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {/* Offering Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mt-6">
+          {offerings.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+            >
+              <Card className="rounded-2xl shadow-sm hover:shadow-lg transition-all bg-white overflow-hidden border">
+                <CardContent className="p-6 flex flex-col gap-4 text-left">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-48 object-cover rounded-lg shadow-sm"
+                  />
+                  <h3 className="text-xl font-semibold uppercase tracking-wide text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
-    )
+      </div>
+    </div>
+  );
 }
-
-export default Offering

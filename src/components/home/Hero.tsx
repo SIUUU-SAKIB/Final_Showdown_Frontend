@@ -7,6 +7,7 @@ import { AiOutlineMail } from 'react-icons/ai'
 import { IoHomeOutline } from 'react-icons/io5'
 import { LuFacebook } from 'react-icons/lu'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const Hero = () => {
 
@@ -76,9 +77,10 @@ const Hero = () => {
             </div>
             {/* social icons */}
             <div className='flex gap-4 items-center '>
-              <div className='p-4 bg-zinc-300/20 rounded-lg cursor-pointer hover:bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 transition duration-300 text-blue-400 hover:text-white'>
+              <Link target="_blank"
+                rel="noopener noreferrer" href={"https://www.facebook.com/sakib.islam.599136"} className='p-4 bg-zinc-300/20 rounded-lg cursor-pointer hover:bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 transition duration-300 text-blue-400 hover:text-white'>
                 <LuFacebook className='text-2xl font-light ' />
-              </div>
+              </Link>
 
               <div className='p-4 bg-zinc-300/20 rounded-lg cursor-pointer hover:bg-linear-to-r from-indigo-400/80 via-blue-500/80 to-cyan-400 transition duration-300 text-blue-400 hover:text-white'>
                 <FaXTwitter className='text-2xl font-light ' />

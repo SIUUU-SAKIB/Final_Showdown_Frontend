@@ -17,8 +17,8 @@ const Experience = () => {
                     {/* section-1 */}
                     <div className='flex flex-col gap-4 h-full justify-evenly'>
                         <p className='text-white font-md py-12'>{active ? "March 2017 to 2020" : "From 2012 to 2014"}</p>
-                        <p className='text-white font-md py-12'>{active ? "March 2017 to 2020" : "From 2014 to 2016"}</p>
-                        <p className='text-white font-md py-12'>{active ? "March 2017 to 2020" : "From 2018 to 2024"}</p>
+                        <p className='text-white font-md py-12'>{active ? "March 2020 to 2023" : "From 2014 to 2016"}</p>
+                        <p className='text-white font-md py-12'>{active ? "March 2023 to present" : "From 2018 to 2024"}</p>
 
                     </div>
                     {/* section-2 */}
@@ -26,18 +26,18 @@ const Experience = () => {
                     {/* section-3 */}
                     <div className='flex flex-col gap-4 h-full justify-evenly'>
                         <div className='flex flex-col gap-4 text-white py-8'>
-                            <p className='text-lg font-bold'>{active ? "Colorlib" : "SSC"}</p>
-                            <p className='text-white text-sm max-w-[150px]'>{active ? "Senior Web Developer Santa monica, Los Angeles" : "The Aided High School, Sylhet."}</p>
+                            <p className='text-lg font-bold'>{active ? "Pathao" : "SSC"}</p>
+                            <p className='text-white text-sm max-w-[150px]'>{active ? "junior Web Developer Dhanmondi, Dhaka." : "The Aided High School, Sylhet."}</p>
                         </div>
 
                         <div className='flex flex-col gap-4 text-white py-4 md:py-8'>
-                            <p className='text-lg font-bold'>{active ? "Colorlib" : "HSC"}</p>
-                            <p className='text-white text-sm max-w-[150px]'>{active ? "Senior Web Developer Santa monica, Los Angeles" : "The Aided High School, Sylhet."}</p>
+                            <p className='text-lg font-bold'>{active ? "NextZen" : "HSC"}</p>
+                            <p className='text-white text-sm max-w-[150px]'>{active ? "Junior Backend Developer Chittagong" : "Madan Mohan College, Sylhet."}</p>
                         </div>
 
                         <div className='flex flex-col gap-4 text-white py-8'>
-                            <p className='text-lg font-bold'>{active ? "Colorlib" : "BBA"}</p>
-                            <p className='text-white text-sm max-w-[150px]'>{active ? "Senior Web Developer Santa monica, Los Angeles" : "The Aided High School, Sylhet."}</p>
+                            <p className='text-lg font-bold'>{active ? "ColoriFy" : "BBA"}</p>
+                            <p className='text-white text-sm max-w-[150px]'>{active ? "Senior Full Stack Developer Zindabazar,Sylhet" : "Fenchugonj Government College, Sylhet."}</p>
                         </div>
                     </div>
                 </div>

@@ -1,13 +1,13 @@
 "use client"
 import { createBlog, updateBlog } from "@/lib/blogs"
+import { useRouter } from "next/navigation"
 import { use, useEffect, useState } from "react"
+import Swal from "sweetalert2"
 
 
 const EditBlog = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params)
-
-
-
+const router = useRouter()
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [tags, setTags] = useState('')
@@ -53,24 +53,38 @@ const EditBlog = ({ params }: { params: Promise<{ slug: string }> }) => {
       "coverImageUrl": url,
       "category": category,
     }
-    console.log(formData)
-    try {
+
+
+    Swal.fire({
+  title: "Publish this edited blog?",
+
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, publish it!"
+}).then(async(result) => {
+  if (result.isConfirmed) {
+     try {
       const result = await updateBlog(formData, slug)
       setTitle("")
       setContent("")
       setTags("")
       setUrl("")
       setCategory("")
-      console.log("Blog Edited", result)
+      router.push('/dashboard')
     } catch (err) {
       console.log("Something wrong happend", err)
     }
+  }
+});
+   
   }
 
   return (
     <div className='w-full grid place-content-center min-h-screen px-4'>
       <div className='max-w-4xl md:min-w-4xl mx-auto flex flex-col items-center justify-center gap-4 py-4  shadow-lg shadow-purple-500'>
-        <h1 className='text-2xl font-semibold'>Create New Blog</h1>
+        <h1 className='text-2xl font-semibold'>Edit Blog</h1>
 
         <form onSubmit={handleSubmit} className='w-full flex flex-col gap-4 items-center py-2 px-4'>
           <input onChange={(e) => { setTitle(e.target.value) }} required value={title} type='text' className='w-full border text-white py-2 focus:bg-white focus:text-black outline-none px-2 transition-all duration-200' placeholder='Blog Title' />
@@ -87,7 +101,7 @@ const EditBlog = ({ params }: { params: Promise<{ slug: string }> }) => {
             <option>Frontend</option>
             <option>UI/UX</option>
           </select>
-          <button type='submit' className='bg-white text-black font-semibold text-lg   w-full py-4 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer hover:border hover:border-purple-500'>Send to Dashboard</button>
+          <button type='submit' className='bg-white text-black font-semibold text-lg   w-full py-4 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer hover:border hover:border-purple-500'>Publish</button>
         </form>
       </div>
     </div>
